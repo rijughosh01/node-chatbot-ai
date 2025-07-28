@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply text-gray-100;
+  }
+  
+  body {
+    @apply bg-dark-900 text-gray-100 font-sans antialiased;
+  }
+  
+  
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-800/50;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-600/50 rounded-full hover:bg-gray-500/50 transition-colors duration-200;
+  }
+  
+  
+  .hljs {
+    @apply rounded-xl !important;
+  }
+  
+  pre {
+    @apply whitespace-pre-wrap;
+  }
+}

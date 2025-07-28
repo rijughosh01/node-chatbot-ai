@@ -34,42 +34,75 @@ function Register({ onRegister }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="auth-form">
-      <h2>Create Account</h2>
-      <label htmlFor="register-username">Username or Email</label>
-      <input
-        id="register-username"
-        type="text"
-        placeholder="Enter your username or email"
-        value={username}
-        onChange={e => setUsername(e.target.value)}
-        required
-        autoComplete="username"
-      />
-      <label htmlFor="register-password">Password</label>
-      <div style={{ position: 'relative' }}>
-        <input
-          id="register-password"
-          type={showPassword ? "text" : "password"}
-          placeholder="Create a password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
-          autoComplete="new-password"
-        />
-        <button
-          type="button"
-          className="password-toggle"
-          onClick={() => setShowPassword((v) => !v)}
-          tabIndex={-1}
-          aria-label={showPassword ? "Hide password" : "Show password"}
-        >
-          {showPassword ? "🙈" : "👁️"}
-        </button>
+    <form onSubmit={handleSubmit} className="w-full space-y-6">
+      <div className="text-center">
+        <h2 className="text-2xl font-bold text-white mb-2">Create Account</h2>
+        <p className="text-gray-400 text-sm">Join SigmaGPT and start chatting</p>
       </div>
-      <button type="submit">Register</button>
-      {error && <div className="error">{error}</div>}
-      {success && <div className="success">{success}</div>}
+
+      <div className="space-y-4">
+        <div>
+          <label htmlFor="register-username" className="block text-sm font-medium text-gray-300 mb-2">
+            Username or Email
+          </label>
+          <input
+            id="register-username"
+            type="text"
+            placeholder="Enter your username or email"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            required
+            autoComplete="username"
+            className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-primary-500/50 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 backdrop-blur-sm"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="register-password" className="block text-sm font-medium text-gray-300 mb-2">
+            Password
+          </label>
+          <div className="relative">
+            <input
+              id="register-password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Create a password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+              autoComplete="new-password"
+              className="w-full px-4 py-3 pr-12 bg-gray-800/50 border border-gray-600/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-primary-500/50 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 backdrop-blur-sm"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((v) => !v)}
+              tabIndex={-1}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 transition-colors duration-200 p-1"
+            >
+              {showPassword ? "🙈" : "👁️"}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {error && (
+        <div className="bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-xl text-sm text-center">
+          {error}
+        </div>
+      )}
+
+      {success && (
+        <div className="bg-green-500/10 border border-green-500/30 text-green-400 px-4 py-3 rounded-xl text-sm text-center">
+          {success}
+        </div>
+      )}
+
+      <button 
+        type="submit"
+        className="w-full bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-glow transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+      >
+        Create Account
+      </button>
     </form>
   );
 }

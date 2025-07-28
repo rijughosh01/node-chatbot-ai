@@ -13,7 +13,6 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-// Register auth routes BEFORE chat routes to avoid authMiddleware on /auth endpoints
 app.use("/api/auth", authRoutes);
 app.use("/api", chatRoutes);
 
