@@ -1,11 +1,45 @@
 .sidebar {
-    background-color: #171717;
-    color: #b4b4b4;
-    height: 100vh;
-    width: 320px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-width: 250px;
+  background: #181a20;
+  position: relative;
+}
+
+.sidebar-auth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: auto;
+  margin-bottom: 1.5rem;
+  align-items: center;
+  padding: 0 1rem 0 1rem;
+  background: transparent;
+  position: static;
+}
+
+.sidebar-auth-btn {
+  width: 100%;
+  background: #23272f;
+  border: 1px solid #4f8cff;
+  color: #4f8cff;
+  border-radius: 8px;
+  padding: 0.6rem 0;
+  padding-left: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+.sidebar-auth-btn:last-child {
+  margin-bottom: 0;
+}
+.sidebar-auth-btn:hover {
+  background: #4f8cff;
+  color: #fff;
 }
 
 

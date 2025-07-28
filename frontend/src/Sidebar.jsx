@@ -5,7 +5,7 @@ import { v1 as uuidv1 } from "uuid";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
 
-function Sidebar() {
+function Sidebar({ onShowLogin, onShowRegister }) {
   const {
     allThreads,
     setAllThreads,
@@ -15,11 +15,15 @@ function Sidebar() {
     setReply,
     setCurrThreadId,
     setPrevChats,
+    isAuthenticated
   } = useContext(MyContext);
 
   const getAllThreads = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/thread`);
+      const token = localStorage.getItem("token");
+      const response = await fetch(`${API_BASE_URL}/thread`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
       const res = await response.json();
       const filteredData = res.map((thread) => ({
         threadId: thread.threadId,
@@ -48,8 +52,10 @@ function Sidebar() {
     setCurrThreadId(newThreadId);
 
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
-        `${API_BASE_URL}/thread/${newThreadId}`
+        `${API_BASE_URL}/thread/${newThreadId}`,
+        { headers: { 'Authorization': `Bearer ${token}` } }
       );
       const res = await response.json();
       console.log(res);
@@ -63,9 +69,10 @@ function Sidebar() {
 
   const deleteThread = async (threadId) => {
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
         `${API_BASE_URL}/thread/${threadId}`,
-        { method: "DELETE" }
+        { method: "DELETE", headers: { 'Authorization': `Bearer ${token}` } }
       );
       const res = await response.json();
       console.log(res);
@@ -115,9 +122,12 @@ function Sidebar() {
         ))}
       </ul>
 
-      <div className="sign">
-        <p>By ApnaCollege &hearts;</p>
-      </div>
+      {!isAuthenticated && (
+        <div className="sidebar-auth-buttons">
+          <button onClick={onShowLogin} className="sidebar-auth-btn">Login</button>
+          <button onClick={onShowRegister} className="sidebar-auth-btn">Create Account</button>
+        </div>
+      )}
     </section>
   );
 }

@@ -3,6 +3,7 @@ import "dotenv/config";
 import cors from "cors";
 import mongoose from "mongoose";
 import chatRoutes from "./routes/chat.js";
+import authRoutes from "./routes/auth.js";
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -12,6 +13,8 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+// Register auth routes BEFORE chat routes to avoid authMiddleware on /auth endpoints
+app.use("/api/auth", authRoutes);
 app.use("/api", chatRoutes);
 
 
