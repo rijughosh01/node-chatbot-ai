@@ -111,7 +111,7 @@ function Sidebar({ onShowLogin, onShowRegister, onCloseSidebar, onLogout }) {
       >
         <div className="flex items-center space-x-2 md:space-x-3">
           <img
-            src="src/assets/blacklogo.png"
+            src="/blacklogo.png"
             alt="gpt logo"
             className="h-8 w-8 md:h-10 md:w-10 bg-white rounded-full object-cover"
           />
