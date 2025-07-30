@@ -8,11 +8,13 @@ function Register({ onRegister }) {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
+    setIsLoading(true);
     try {
       const response = await fetch(`${API_BASE_URL}/auth/register`, {
         method: "POST",
@@ -30,6 +32,8 @@ function Register({ onRegister }) {
       }
     } catch (err) {
       setError("Network error");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -99,9 +103,19 @@ function Register({ onRegister }) {
 
       <button 
         type="submit"
-        className="w-full bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-glow transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+        disabled={isLoading}
+        className={`w-full bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-glow transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-primary-500/50 ${
+          isLoading ? 'opacity-50 cursor-not-allowed' : ''
+        }`}
       >
-        Create Account
+        {isLoading ? (
+          <div className="flex items-center justify-center space-x-2">
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            <span>Creating Account...</span>
+          </div>
+        ) : (
+          'Create Account'
+        )}
       </button>
     </form>
   );
